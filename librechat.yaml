@@ -13,17 +13,11 @@ endpoints:
     models:
       default: ["gemini-2.5-flash", "gemini-2.5-pro"]
       fetch: true
-  custom:
-    - name: "DeepSeek"
-      apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
-      models:
-        default: ["deepseek-chat", "deepseek-reasoner"]
-        fetch: false
-      titleConvo: true
-      titleModel: "deepseek-chat"
-      modelDisplayLabel: "DeepSeek"
-
-# Tímto explicitně zapnete zobrazení v bočním menu rozhraní
-interface:
-  endpoints: ["anthropic", "google", "custom"]
+  openAI:
+    apiKey: "${DEEPSEEK_API_KEY}"
+    baseURL: "https://deepseek.com"
+    models:
+      default: ["deepseek-chat", "deepseek-reasoner"]
+      fetch: false
+    titleModel: "deepseek-chat"
+    modelDisplayLabel: "DeepSeek"
