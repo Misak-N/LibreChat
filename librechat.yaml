@@ -23,3 +23,7 @@ endpoints:
       titleConvo: true
       titleModel: "deepseek-chat"
       modelDisplayLabel: "DeepSeek"
+
+# Tímto explicitně zapnete zobrazení v bočním menu rozhraní
+interface:
+  endpoints: ["anthropic", "google", "custom"]
