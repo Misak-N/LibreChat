@@ -1,32 +1,37 @@
 version: "1.1.5"
-
 cache: true
 
 endpoints:
-  # --- TOTO JE DŮLEŽITÉ: Pouze seznam modelů, ne object ---
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
     models:
       - "claude-3-5-sonnet-latest"
       - "claude-3-5-haiku-latest"
     fetch: true
-
   google:
     apiKey: "${GOOGLE_API_KEY}"
     models:
       - "gemini-2.5-flash"
       - "gemini-2.5-pro"
     fetch: true
-
-  # --- TOTO JE TAKÉ DŮLEŽITÉ: custom musí být PÁSMO (array) ---
   custom:
-    - name: "DeepSeek"
+    - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
       models:
-        default: ["deepseek-chat", "deepseek-reasoner"]
+        default: ["deepseek-chat"]
         fetch: false
       titleConvo: true
       titleModel: "deepseek-chat"
-      modelDisplayLabel: "DeepSeek"
+      modelDisplayLabel: "DeepSeek Chat"
+    - name: "DeepSeek Reasoner"
+      type: "openai"
+      apiKey: "${DEEPSEEK_API_KEY}"
+      baseURL: "https://api.deepseek.com/v1"
+      models:
+        default: ["deepseek-reasoner"]
+        fetch: false
+      titleConvo: true
+      titleModel: "deepseek-reasoner"
+      modelDisplayLabel: "DeepSeek Reasoner"
