@@ -35,3 +35,15 @@ endpoints:
       titleConvo: true
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
+
+mcpServers:
+  google-drive:
+    type: stdio
+    command: npx
+    args:
+      - "-y"
+      - "@node2flow/google-drive-mcp"
+    env:
+      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID}"
+      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET}"
+      GOOGLE_REFRESH_TOKEN: "${GOOGLE_REFRESH_TOKEN}"
