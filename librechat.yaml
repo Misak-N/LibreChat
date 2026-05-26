@@ -1,4 +1,4 @@
-version: 1.2.0
+version: "1.1.5"
 
 cache: true
 
@@ -16,7 +16,7 @@ endpoints:
   custom:
     - name: "DeepSeek"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://api.deepseek.com/v1"
       models:
         default: ["deepseek-chat", "deepseek-reasoner"]
         fetch: false
