@@ -6,13 +6,17 @@ endpoints:
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
     models:
-      default: ["claude-3-5-sonnet-latest", "claude-3-5-haiku-latest"]
-      fetch: true
+      - "claude-3-5-sonnet-latest"
+      - "claude-3-5-haiku-latest"
+    fetch: true
+
   google:
     apiKey: "${GOOGLE_API_KEY}"
     models:
-      default: ["gemini-2.5-flash", "gemini-2.5-pro"]
-      fetch: true
+      - "gemini-2.5-flash"
+      - "gemini-2.5-pro"
+    fetch: true
+
   custom:
     - name: "DeepSeek"
       type: "openai"
