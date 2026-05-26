@@ -15,6 +15,7 @@ endpoints:
       fetch: true
   custom:
     - name: "DeepSeek"
+      type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://api.deepseek.com/v1"
       models:
