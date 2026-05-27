@@ -39,7 +39,5 @@ endpoints:
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://server.smithery.ai/googledrive"
-    headers:
-      Authorization: "Bearer ${SMITHERY_API_KEY}"
+    url: "https://mcp.composio.dev/googledrive/${COMPOSIO_API_KEY}"
     timeout: 30000
