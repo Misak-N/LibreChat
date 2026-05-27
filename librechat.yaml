@@ -39,7 +39,5 @@ endpoints:
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://server.smithery.ai/@node2flow/google-drive/mcp"
-    headers:
-      Authorization: "Bearer ${SMITHERY_API_KEY}"
+    url: "https://mcp.smithery.run/misakn-72/@node2flow/google-drive/mcp"
     timeout: 30000
