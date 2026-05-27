@@ -38,6 +38,6 @@ endpoints:
 
 mcpServers:
   google-drive:
-    type: sse
+    type: streamable-http
     url: "https://server.smithery.ai/googledrive"
     timeout: 30000
