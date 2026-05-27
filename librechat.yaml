@@ -35,7 +35,7 @@ endpoints:
       titleConvo: true
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
-
+      
 mcpServers:
   google-drive:
     type: streamable-http
