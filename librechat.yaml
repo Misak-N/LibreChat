@@ -38,12 +38,6 @@ endpoints:
 
 mcpServers:
   google-drive:
-    type: stdio
-    command: npx
-    args:
-      - "-y"
-      - "@node2flow/google-drive-mcp"
-    env:
-      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID}"
-      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET}"
-      GOOGLE_REFRESH_TOKEN: "${GOOGLE_REFRESH_TOKEN}"
+    type: streamable-http
+    url: "https://server.smithery.ai/@node2flow/google-drive/mcp?api_key=${SMITHERY_API_KEY}&config=${SMITHERY_GDRIVE_CONFIG}"
+    timeout: 30000
