@@ -39,5 +39,7 @@ endpoints:
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://mcp.composio.dev/googledrive/${COMPOSIO_API_KEY}"
+    url: "https://connect.composio.dev/mcp"
+    headers:
+      x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
