@@ -65,12 +65,12 @@ mcpServers:
     url: "https://composio.dev"
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
-    timeout: 30000
+    timeout: 60000  # NAVÝŠENO PRO STABILITU
 
   web-fetch:
     type: streamable-http
     url: "https://smithery.ai"
-    timeout: 60000  # ZVÝŠENO: Server dostane dostatek času a nespadne
+    timeout: 60000  # NAVÝŠENO: Server nyní dostane čas se spojit a nespadne
 
 # 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
 webSearch:
