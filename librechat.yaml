@@ -29,11 +29,11 @@ mcpSettings:
 # =============================================================================
 # MCP Servers
 # =============================================================================
-mcpServers:
-  web-fetch:
-    type: "streamable-http"
-    url: "https://mcp-server-fetch.api.smithery.ai"
-    timeout: 60000
+# mcpServers:
+#  web-fetch:
+#   type: "streamable-http"
+#    url: "https://mcp-server-fetch.api.smithery.ai"
+#    timeout: 60000
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
