@@ -29,11 +29,13 @@ mcpSettings:
 # =============================================================================
 # MCP Servers
 # =============================================================================
-# mcpServers:
-#  web-fetch:
-#   type: "streamable-http"
-#    url: "https://mcp-server-fetch.api.smithery.ai"
-#    timeout: 60000
+mcpServers:
+  composio:
+    type: "streamable-http"
+    url: "https://connect.composio.dev/mcp"
+    headers:
+      x-api-key: "${COMPOSIO_API_KEY}"
+    timeout: 60000
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
