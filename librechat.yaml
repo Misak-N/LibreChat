@@ -21,12 +21,6 @@ fileConfig:
       fileSizeLimit: 104857600
   serverFileSizeLimit: 104857600
 
-# BEZPEČNOSTNÍ POVOLENÍ: Bez tohoto LibreChat MCP servery z internetu zablokuje!
-mcpSettings:
-  allowedAddresses:
-    - "connect.composio.dev"
-    - "mcp-server-fetch.api.smithery.ai"
-
 endpoints:
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
@@ -64,7 +58,7 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (BEZ CHYBNÝCH ADRES)
 mcpServers:
   google-drive:
     type: streamable-http
