@@ -1,13 +1,25 @@
 version: "1.2.5"
 cache: true
 
-# TATO SEKCE NATVRDO ZAPNE AGENTY V LEVÉM MENU
+# 1. SEKCE: AKTIVACE VŠECH GRAFICKÝCH FUNKCÍ (VČETNĚ ARTEFAKTŮ)
 interface:
   endpointsMenu: true
   modelSelect: true
-  parameters: true      # Bez parametru se agenty nezobrazí
+  parameters: true      
   sidePanel: true
-  agentBuilder: true   # Zapne tvorbu agentů
+  agentBuilder: true   
+  artifacts: true      # ZAPÍNÁ INTERAKTIVNÍ BOČNÍ OKNO (CLAUDE ARTIFACTS)
+
+# 2. SEKCE: NASTAVENÍ STRATEGIE PRO SOUBORY A VELKOU PAMĚŤ (RAG)
+fileConfig:
+  endpoints:
+    assistants:
+      fileLimit: 10
+      fileSizeLimit: 104857600 # 100 MB na soubor
+    agents:
+      fileLimit: 20
+      fileSizeLimit: 104857600
+  serverFileSizeLimit: 104857600
 
 endpoints:
   anthropic:
@@ -22,14 +34,13 @@ endpoints:
       - "gemini-2.5-flash"
       - "gemini-2.5-pro"
     fetch: true
-  # TATO SEKCE AKTIVUJE PODPORU AGENTŮ V BACKENDU
   agents:
     disableBuilder: false
   custom:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://api.deepseek.com/v1"
+      baseURL: "https://deepseek.com"
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -39,7 +50,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://api.deepseek.com/v1"
+      baseURL: "https://deepseek.com"
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -47,10 +58,17 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY PRO PROPOJENÍ S APLIKACEMI
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://connect.composio.dev/mcp"
+    url: "https://composio.dev"
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
+
+  # UKÁZKA: Tento server umožní AI číst texty z jakékoliv URL adresy na internetu
+  web-fetch:
+    type: stdio
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-fetch"]
