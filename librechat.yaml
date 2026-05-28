@@ -40,7 +40,7 @@ endpoints:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"  # VAŠE FUNKČNÍ ADRESA
+      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše funkční adresa
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -50,7 +50,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"  # VAŠE FUNKČNÍ ADRESA
+      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše funkční adresa
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -58,7 +58,7 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZDE BYLA CHYBA - KOMPLETNĚ VYČIŠTĚNO)
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (PŘIDÁN TIMEOUT PROTI PÁDŮM)
 mcpServers:
   google-drive:
     type: streamable-http
@@ -70,7 +70,7 @@ mcpServers:
   web-fetch:
     type: streamable-http
     url: "https://smithery.ai"
-    timeout: 30000
+    timeout: 60000  # ZVÝŠENO: Server dostane dostatek času a nespadne
 
 # 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
 webSearch:
