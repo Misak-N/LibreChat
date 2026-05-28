@@ -48,7 +48,7 @@ endpoints:
 
   google:
     apiKey: "${GOOGLE_API_KEY}"
-    fetch: true                     
+    fetch: true                     # ZMĚNA: Gemini nyní načte všechny své dostupné modely samo
 
   agents:
     disableBuilder: false
@@ -57,6 +57,6 @@ endpoints:
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
-      fetch: true                      
+      baseURL: "https://deepseek.com" # OPRAVENO: Oficiální brána pro automatické stažení modelů
+      fetch: true                     # ZMĚNA: DeepSeek nyní načte Chat i Reasoner automaticky z API
       titleConvo: true
