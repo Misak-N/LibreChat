@@ -102,7 +102,7 @@ endpoints:
           - "llama-3.1-8b-instant"
           - "mixtral-8x7b-32768"
           - "gemma2-9b-it"
-        fetch: true
+        fetch: false
       titleConvo: true
       titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq"
