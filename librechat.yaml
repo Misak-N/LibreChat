@@ -20,45 +20,176 @@ interface:
     create: true
 
 # =============================================================================
-# MCP Settings (SSRF whitelist pro lokální adresy)
+# Memory — AI si pamatuje tvoje preference mezi konverzacemi
+# Pouziva Groq (Llama 3.1 8B) jako memory agenta — zdarma
 # =============================================================================
-mcpSettings:
-  allowedAddresses:
-    - "127.0.0.1:3001"
-    - "host.docker.internal:8080"
+memory:
+  disabled: false
+  personalize: true
+  tokenLimit: 3000
+  messageWindowSize: 5
+  validKeys:
+    - "preferences"
+    - "personal_info"
+    - "work_info"
+    - "skills"
+    - "interests"
+    - "context"
+  agent:
+    provider: "Groq"
+    model: "llama-3.1-8b-instant"
+    instructions: |
+      You are a memory management assistant. Store information using only these keys:
+      - preferences: communication style, language, workflow preferences
+      - personal_info: name, location, explicitly shared personal details
+      - work_info: job, projects, tools used
+      - skills: technical skills, expertise areas
+      - interests: hobbies, topics of interest
+      - context: ongoing projects, important facts
+      Only store what the user explicitly shares. Delete outdated information.
+    model_parameters:
+      temperature: 0.1
+      max_tokens: 1000
 
 # =============================================================================
-# MCP Servers
+# Model Specs — seskupeni modelu v menu
 # =============================================================================
-mcpServers:
-  # FIXME: Nahraď URL správným MCP endpointem z Composio dashboardu
-  # Vypadá typicky jako: https://mcp.composio.dev/googledrive/<tvuj-hash>
-  google-drive:
-    type: "streamable-http"
-    url: "https://mcp.composio.dev/googledrive/VLOZ-SVUJ-COMPOSIO-ENDPOINT"
-    headers:
-      x-api-key: "${COMPOSIO_API_KEY}"
-    timeout: 60000
+modelSpecs:
+  list:
+    # ---- Anthropic ----
+    - name: "claude-sonnet"
+      label: "Claude Sonnet"
+      description: "Anthropic Claude — vyvazeny model pro vsechny ukoly"
+      group: "Anthropic"
+      groupIcon: "anthropic"
+      preset:
+        endpoint: "anthropic"
+        model: "claude-sonnet-4-20250514"
 
-  # Lokální web-fetch server
-  web-fetch:
-    type: "streamable-http"
-    url: "http://127.0.0.1:3001"
-    timeout: 60000
+    - name: "claude-haiku"
+      label: "Claude Haiku"
+      description: "Anthropic Claude — rychly a levny"
+      group: "Anthropic"
+      preset:
+        endpoint: "anthropic"
+        model: "claude-haiku-4-5-20251001"
+
+    # ---- Google Gemini ----
+    - name: "gemini-flash"
+      label: "Gemini 2.5 Flash"
+      description: "Google — nejlepsi free tier, rychly"
+      group: "Google"
+      groupIcon: "google"
+      preset:
+        endpoint: "google"
+        model: "gemini-2.5-flash-preview-05-20"
+
+    - name: "gemini-pro"
+      label: "Gemini 2.5 Pro"
+      description: "Google — nejmocnejsi Gemini model"
+      group: "Google"
+      preset:
+        endpoint: "google"
+        model: "gemini-2.5-pro-preview-05-06"
+
+    # ---- DeepSeek ----
+    - name: "deepseek-chat"
+      label: "DeepSeek Chat (V3)"
+      description: "DeepSeek — silny na kod a obecne ukoly"
+      group: "DeepSeek"
+      groupIcon: "https://chat.deepseek.com/favicon.ico"
+      preset:
+        endpoint: "DeepSeek"
+        model: "deepseek-chat"
+
+    - name: "deepseek-reasoner"
+      label: "DeepSeek Reasoner (R1)"
+      description: "DeepSeek — hloubkove uvazovani, chain-of-thought"
+      group: "DeepSeek"
+      preset:
+        endpoint: "DeepSeek"
+        model: "deepseek-reasoner"
+
+    # ---- Groq (rychly inference) ----
+    - name: "groq-llama-70b"
+      label: "Llama 3.3 70B"
+      description: "Meta Llama pres Groq — velky a schopny"
+      group: "Groq"
+      groupIcon: "https://groq.com/favicon.ico"
+      preset:
+        endpoint: "Groq"
+        model: "llama-3.3-70b-versatile"
+
+    - name: "groq-llama-8b"
+      label: "Llama 3.1 8B"
+      description: "Meta Llama pres Groq — bleskovy, lehky"
+      group: "Groq"
+      preset:
+        endpoint: "Groq"
+        model: "llama-3.1-8b-instant"
+
+    - name: "groq-mixtral"
+      label: "Mixtral 8x7B"
+      description: "Mistral MoE pres Groq — dobry na kod"
+      group: "Groq"
+      preset:
+        endpoint: "Groq"
+        model: "mixtral-8x7b-32768"
+
+    # ---- Mistral ----
+    - name: "mistral-small"
+      label: "Mistral Small"
+      description: "Mistral — lehky, free tier"
+      group: "Mistral"
+      groupIcon: "https://mistral.ai/favicon.ico"
+      preset:
+        endpoint: "Mistral"
+        model: "mistral-small-latest"
+
+    - name: "codestral"
+      label: "Codestral"
+      description: "Mistral — specializovany na kod"
+      group: "Mistral"
+      preset:
+        endpoint: "Mistral"
+        model: "codestral-latest"
+
+    # ---- OpenRouter (agregator) ----
+    - name: "openrouter-llama"
+      label: "Llama 3 70B (OpenRouter)"
+      description: "OpenRouter — pristup ke stovkam modelu"
+      group: "OpenRouter"
+      groupIcon: "https://openrouter.ai/favicon.ico"
+      preset:
+        endpoint: "OpenRouter"
+        model: "meta-llama/llama-3-70b-instruct"
 
 # =============================================================================
 # Endpoints
 # =============================================================================
 endpoints:
+  # ---------- Anthropic ----------
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
     fetch: true
+
+  # ---------- Google Gemini ----------
+  # Free tier: 500 req/den
+  # API klic: https://aistudio.google.com/apikey
+  # V .env: GOOGLE_SEARCH_API_KEY=tvuj-klic
   google:
     apiKey: "${GOOGLE_SEARCH_API_KEY}"
     fetch: true
+
+  # ---------- Agents ----------
   agents:
     disableBuilder: false
+
+  # ---------- Custom endpointy ----------
   custom:
+    # ========== DeepSeek ==========
+    # API klic: https://platform.deepseek.com
+    # V .env: DEEPSEEK_API_KEY=tvuj-klic
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
@@ -71,6 +202,55 @@ endpoints:
       titleConvo: true
       titleModel: "deepseek-chat"
       modelDisplayLabel: "DeepSeek"
+
+    # ========== Groq ==========
+    # API klic: https://console.groq.com
+    # V .env: GROQ_API_KEY=tvuj-klic
+    - name: "Groq"
+      apiKey: "${GROQ_API_KEY}"
+      baseURL: "https://api.groq.com/openai/v1/"
+      models:
+        default:
+          - "llama-3.3-70b-versatile"
+          - "llama-3.1-8b-instant"
+          - "mixtral-8x7b-32768"
+          - "gemma2-9b-it"
+        fetch: true
+      titleConvo: true
+      titleModel: "llama-3.1-8b-instant"
+      modelDisplayLabel: "Groq"
+
+    # ========== Mistral ==========
+    # API klic: https://console.mistral.ai
+    # V .env: MISTRAL_API_KEY=tvuj-klic
+    - name: "Mistral"
+      apiKey: "${MISTRAL_API_KEY}"
+      baseURL: "https://api.mistral.ai/v1"
+      models:
+        default:
+          - "mistral-small-latest"
+          - "codestral-latest"
+          - "mistral-medium-latest"
+        fetch: true
+      titleConvo: true
+      titleModel: "mistral-small-latest"
+      modelDisplayLabel: "Mistral"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+
+    # ========== OpenRouter ==========
+    # Registrace: https://openrouter.ai -> Keys
+    # V .env: OPENROUTER_KEY=tvuj-klic (NE OPENROUTER_API_KEY!)
+    - name: "OpenRouter"
+      apiKey: "${OPENROUTER_KEY}"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default:
+          - "meta-llama/llama-3-70b-instruct"
+        fetch: true
+      titleConvo: true
+      titleModel: "meta-llama/llama-3-70b-instruct"
+      dropParams: ["stop"]
+      modelDisplayLabel: "OpenRouter"
 
 # =============================================================================
 # Web Search
