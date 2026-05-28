@@ -58,7 +58,7 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY PRO PROPOJENÍ S APLIKACEMI
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (OPRAVENÁ VERZE PRO RAILWAY)
 mcpServers:
   google-drive:
     type: streamable-http
@@ -67,8 +67,8 @@ mcpServers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
 
-  # UKÁZKA: Tento server umožní AI číst texty z jakékoliv URL adresy na internetu
+  # OPRAVA: Použití stabilního HTTP streamu namísto lokálního příkazu npx
   web-fetch:
-    type: stdio
-    command: "npx"
-    args: ["-y", "@modelcontextprotocol/server-fetch"]
+    type: streamable-http
+    url: "https://mcp-server-fetch.api.smithery.ai"
+    timeout: 30000
