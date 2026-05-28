@@ -40,7 +40,7 @@ endpoints:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # VAŠE FUNKČNÍ ADRESA
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -50,7 +50,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # VAŠE FUNKČNÍ ADRESA
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -58,7 +58,7 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (BEZ CHYBNÝCH ADRES)
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZDE BYLA CHYBA - KOMPLETNĚ VYČIŠTĚNO)
 mcpServers:
   google-drive:
     type: streamable-http
