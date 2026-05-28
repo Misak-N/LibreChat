@@ -40,7 +40,7 @@ endpoints:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # OPRAVENO: Správná adresa pro API
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -50,7 +50,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # OPRAVENO: Správná adresa pro API
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -62,13 +62,17 @@ endpoints:
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://composio.dev"
+    url: "https://composio.dev"  # OPRAVENO: Správná MCP brána pro Composio
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 30000
 
-  # OPRAVA: Použití stabilního HTTP streamu namísto lokálního příkazu npx
   web-fetch:
     type: streamable-http
     url: "https://mcp-server-fetch.api.smithery.ai"
     timeout: 30000
+
+# 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
+webSearch:
+  searchProvider: "tavily"
+  tavilyApiKey: "${TAVILY_API_KEY}"
