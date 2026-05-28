@@ -43,10 +43,16 @@ endpoints:
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
-      fetch: true
+      baseURL: "https://deepseek.com" # Opravená oficiální API adresa
+      models:
+        default:
+          - "deepseek-chat"     # Tohle je interní název pro DeepSeek V3 / V4
+          - "deepseek-reasoner" # Tohle je interní název pro DeepSeek R1 (Deep Thinking)
+        fetch: false            # Vypnuto automatické stahování, pokud selhává CORS/IP
       titleConvo: true
-
+      titleModel: "deepseek-chat"
+      modelDisplayLabel: "DeepSeek"
+      
 webSearch:
   searchProvider: "tavily"
   tavilyApiKey: "${TAVILY_API_KEY}"
