@@ -1,68 +1,62 @@
-version: 1.3.11
+version: "1.3.11"
 cache: true
 
-# 1. SEKCE: ROZHRANÍ (ZAPÍNÁ GRAFICKÉ PRVKY A ARTIFACTS)
 interface:
   endpointsMenu: true
   modelSelect: true
-  parameters: true      
+  parameters: true
   sidePanel: true
   presets: true
   bookmarks: true
   multiConvo: true
-  artifacts: true      
+  artifacts: true
   agents:
     use: true
-    create: true       
+    create: true
 
-# 2. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZAFIXOVANÉ ADRESY)
+mcpSettings:
+  allowedAddresses:
+    - "127.0.0.1:3001"            # Pro lokální web-fetch
+    - "host.docker.internal:8080" # Pokud běžíte v Dockeru a MCP je na hostitelském PC
+
 mcpServers:
   google-drive:
-    type: streamable-http
+    type: "streamable-http"
     url: "https://composio.dev"
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 60000
 
   web-fetch:
-    type: streamable-http
-    url: "https://smithery.ai"
+    type: "streamable-http"
+    url: "http://127.0.0"
     timeout: 60000
 
-# 3. SEKCE: WEBOVÉ VYHLEDÁVÁNÍ TAVILY
-webSearch:
-  searchProvider: "tavily"
-  tavilyApiKey: "${TAVILY_API_KEY}"
-
-# 4. SEKCE: STRATEGIE PRO SOUBORY (RAG)
-fileConfig:
-  endpoints:
-    assistants:
-      fileLimit: 10
-      fileSizeLimit: 104857600 
-    agents:
-      fileLimit: 20
-      fileSizeLimit: 104857600
-  serverFileSizeLimit: 104857600
-
-# 5. SEKCE: SEZNAM AI MODELŮ (AUTOMATIKA PRO VAŠI VERZI)
 endpoints:
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
-    fetch: true                     
-
+    fetch: true
   google:
-    apiKey: "${GOOGLE_API_KEY}"
-    fetch: true                     
-
-  agents:
-    disableBuilder: false
-
-  # VRÁCENO: Funkční zápis přes custom pro DeepSeek
+    apiKey: "${GOOGLE_SEARCH_API_KEY}"
+    fetch: true
   custom:
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
       baseURL: "https://deepseek.com"
-      fetch: true                      
+      fetch: true
       titleConvo: true
+
+webSearch:
+  searchProvider: "tavily"
+  tavilyApiKey: "${TAVILY_API_KEY}"
+
+fileConfig:
+  serverFileSizeLimit: 104857600
+  endpoints:
+    assistants:
+      fileLimit: 10
+      fileSizeLimit: 104857600
+    agents:
+      fileLimit: 20
+      fileSizeLimit: 104857600
