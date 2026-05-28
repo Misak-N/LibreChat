@@ -1,6 +1,7 @@
 version: 1.3.11
 cache: true
 
+# 1. SEKCE: ROZHRANÍ (ZAPÍNÁ GRAFICKÉ PRVKY A ARTIFACTS)
 interface:
   endpointsMenu: true
   modelSelect: true
@@ -14,6 +15,7 @@ interface:
     use: true
     create: true       
 
+# 2. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZAFIXOVANÉ ADRESY)
 mcpServers:
   google-drive:
     type: streamable-http
@@ -24,13 +26,15 @@ mcpServers:
 
   web-fetch:
     type: streamable-http
-    url: "https://mcp-server-fetch.api.smithery.ai"
+    url: "https://smithery.ai"
     timeout: 60000
 
+# 3. SEKCE: WEBOVÉ VYHLEDÁVÁNÍ TAVILY
 webSearch:
   searchProvider: "tavily"
   tavilyApiKey: "${TAVILY_API_KEY}"
 
+# 4. SEKCE: STRATEGIE PRO SOUBORY (RAG)
 fileConfig:
   endpoints:
     assistants:
@@ -41,6 +45,7 @@ fileConfig:
       fileSizeLimit: 104857600
   serverFileSizeLimit: 104857600
 
+# 5. SEKCE: SEZNAM AI MODELŮ (AUTOMATIKA PRO VAŠI VERZI)
 endpoints:
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
@@ -48,15 +53,16 @@ endpoints:
 
   google:
     apiKey: "${GOOGLE_API_KEY}"
-    fetch: true                     # ZMĚNA: Gemini nyní načte všechny své dostupné modely samo
+    fetch: true                     
 
   agents:
     disableBuilder: false
 
+  # VRÁCENO: Funkční zápis přes custom pro DeepSeek
   custom:
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com" # OPRAVENO: Oficiální brána pro automatické stažení modelů
-      fetch: true                     # ZMĚNA: DeepSeek nyní načte Chat i Reasoner automaticky z API
+      baseURL: "https://deepseek.com"
+      fetch: true                      
       titleConvo: true
