@@ -20,6 +20,22 @@ interface:
     create: true
 
 # =============================================================================
+# MCP Settings
+# =============================================================================
+mcpSettings:
+  allowedAddresses:
+    - "host.docker.internal:8080"
+
+# =============================================================================
+# MCP Servers
+# =============================================================================
+mcpServers:
+  web-fetch:
+    type: "streamable-http"
+    url: "https://mcp-server-fetch.api.smithery.ai"
+    timeout: 60000
+
+# =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
 # Pouziva Groq (Llama 3.1 8B) jako memory agenta — zdarma
 # =============================================================================
@@ -36,6 +52,7 @@ memory:
     - "interests"
     - "context"
   agent:
+    enabled: true
     provider: "Groq"
     model: "llama-3.1-8b-instant"
     instructions: |
@@ -61,9 +78,9 @@ endpoints:
     fetch: true
 
   # ---------- Google Gemini ----------
-  # Free tier: 500 req/den
+  # Free tier: 1500 req/den, 1M tokenu/min
   # API klic: https://aistudio.google.com/apikey
-  # V .env: GOOGLE_SEARCH_API_KEY=tvuj-klic
+  # V Railway Variables: GOOGLE_SEARCH_API_KEY=tvuj-klic
   google:
     apiKey: "${GOOGLE_SEARCH_API_KEY}"
     fetch: true
@@ -76,7 +93,7 @@ endpoints:
   custom:
     # ========== DeepSeek ==========
     # API klic: https://platform.deepseek.com
-    # V .env: DEEPSEEK_API_KEY=tvuj-klic
+    # V Railway Variables: DEEPSEEK_API_KEY=tvuj-klic
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
@@ -91,8 +108,9 @@ endpoints:
       modelDisplayLabel: "DeepSeek"
 
     # ========== Groq ==========
+    # Vsechny modely zdarma, rate limity per model
     # API klic: https://console.groq.com
-    # V .env: GROQ_API_KEY=tvuj-klic
+    # V Railway Variables: GROQ_API_KEY=tvuj-klic
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1/"
@@ -100,6 +118,10 @@ endpoints:
         default:
           - "llama-3.3-70b-versatile"
           - "llama-3.1-8b-instant"
+          - "qwen/qwen3-32b"
+          - "meta-llama/llama-4-scout-17b-16e-instruct"
+          - "openai/gpt-oss-20b"
+          - "openai/gpt-oss-120b"
           - "mixtral-8x7b-32768"
           - "gemma2-9b-it"
         fetch: false
@@ -109,7 +131,7 @@ endpoints:
 
     # ========== Mistral ==========
     # API klic: https://console.mistral.ai
-    # V .env: MISTRAL_API_KEY=tvuj-klic
+    # V Railway Variables: MISTRAL_API_KEY=tvuj-klic
     - name: "Mistral"
       apiKey: "${MISTRAL_API_KEY}"
       baseURL: "https://api.mistral.ai/v1"
@@ -126,7 +148,7 @@ endpoints:
 
     # ========== OpenRouter ==========
     # Registrace: https://openrouter.ai -> Keys
-    # V .env: OPENROUTER_KEY=tvuj-klic (NE OPENROUTER_API_KEY!)
+    # V Railway Variables: OPENROUTER_KEY=tvuj-klic
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
