@@ -1,5 +1,13 @@
-version: "1.1.5"
+version: "1.2.5"
 cache: true
+
+# TATO SEKCE NATVRDO ZAPNE AGENTY V LEVÉM MENU
+interface:
+  endpointsMenu: true
+  modelSelect: true
+  parameters: true      # Bez parametru se agenty nezobrazí
+  sidePanel: true
+  agentBuilder: true   # Zapne tvorbu agentů
 
 endpoints:
   anthropic:
@@ -14,6 +22,9 @@ endpoints:
       - "gemini-2.5-flash"
       - "gemini-2.5-pro"
     fetch: true
+  # TATO SEKCE AKTIVUJE PODPORU AGENTŮ V BACKENDU
+  agents:
+    disableBuilder: false
   custom:
     - name: "DeepSeek Chat"
       type: "openai"
