@@ -21,6 +21,12 @@ fileConfig:
       fileSizeLimit: 104857600
   serverFileSizeLimit: 104857600
 
+# BEZPEČNOSTNÍ POVOLENÍ: Bez tohoto LibreChat MCP servery z internetu zablokuje!
+mcpSettings:
+  allowedAddresses:
+    - "connect.composio.dev"
+    - "mcp-server-fetch.api.smithery.ai"
+
 endpoints:
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
@@ -58,7 +64,7 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (OPRAVENÁ VERZE PRO RAILWAY)
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY
 mcpServers:
   google-drive:
     type: streamable-http
@@ -69,7 +75,7 @@ mcpServers:
 
   web-fetch:
     type: streamable-http
-    url: "https://mcp-server-fetch.api.smithery.ai"
+    url: "https://smithery.ai"
     timeout: 30000
 
 # 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
