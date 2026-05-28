@@ -1,14 +1,19 @@
-version: "1.2.5"
+version: 1.3.11
 cache: true
 
-# 1. SEKCE: AKTIVACE VŠECH GRAFICKÝCH FUNKCÍ (VČETNĚ ARTEFAKTŮ)
+# 1. SEKCE: AKTIVACE VŠECH GRAFICKÝCH FUNKCÍ PODLE OFICIÁLNÍHO VZORU
 interface:
   endpointsMenu: true
   modelSelect: true
   parameters: true      
   sidePanel: true
-  agentBuilder: true   
-  artifacts: true      # ZAPÍNÁ INTERAKTIVNÍ BOČNÍ OKNO (CLAUDE ARTIFACTS)
+  presets: true
+  bookmarks: true
+  multiConvo: true
+  artifacts: true      # Ponecháno: Aktivace interaktivního bočního okna
+  agents:
+    use: true
+    create: true       # Zapíná plnohodnotný Agent Builder v menu
 
 # 2. SEKCE: NASTAVENÍ STRATEGIE PRO SOUBORY A VELKOU PAMĚŤ (RAG)
 fileConfig:
@@ -22,12 +27,10 @@ fileConfig:
   serverFileSizeLimit: 104857600
 
 endpoints:
+  # AUTOMATICKÉ STAŽENÍ VŠECH MODELŮ CLAUDE (VRÁTÍ SE VÁM KOMPLETNÍ NABÍDKA)
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
-    models:
-      - "claude-3-5-sonnet-latest"
-      - "claude-3-5-haiku-latest"
-    fetch: true
+    fetch: true                     # Zde se vymazal ruční seznam, servery načtou vše samy
   google:
     apiKey: "${GOOGLE_API_KEY}"
     models:
@@ -40,7 +43,7 @@ endpoints:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše původní funkční adresa
+      baseURL: "https://deepseek.com"  # Zachováno: Vaše funkční adresa
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -50,7 +53,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše původní funkční adresa
+      baseURL: "https://deepseek.com"  # Zachováno: Vaše funkční adresa
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -58,18 +61,18 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZDE BYLY CHYBNÉ ADRESY - KOMPLETNĚ OPRAVENO)
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (PEVNĚ STANOVENÉ BRÁNY S TIMEOUTEM)
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://composio.dev"  # SPRÁVNÁ BRÁNA
+    url: "https://composio.dev"
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 60000
 
   web-fetch:
     type: streamable-http
-    url: "https://smithery.ai"  # SPRÁVNÁ BRÁNA
+    url: "https://smithery.ai"
     timeout: 60000
 
 # 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
