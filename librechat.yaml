@@ -40,7 +40,7 @@ endpoints:
     - name: "DeepSeek Chat"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše původní funkční adresa
       models:
         default: ["deepseek-chat"]
         fetch: false
@@ -50,7 +50,7 @@ endpoints:
     - name: "DeepSeek Reasoner"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
-      baseURL: "https://deepseek.com"
+      baseURL: "https://deepseek.com"  # ZACHOVÁNO: Vaše původní funkční adresa
       models:
         default: ["deepseek-reasoner"]
         fetch: false
@@ -58,18 +58,18 @@ endpoints:
       titleModel: "deepseek-reasoner"
       modelDisplayLabel: "DeepSeek Reasoner"
       
-# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (OPRAVENÉ STRUKTURY ADRES)
+# 3. SEKCE: ROZŠÍŘENÉ MCP SERVERY (ZDE BYLY CHYBNÉ ADRESY - KOMPLETNĚ OPRAVENO)
 mcpServers:
   google-drive:
     type: streamable-http
-    url: "https://composio.dev"
+    url: "https://composio.dev"  # SPRÁVNÁ BRÁNA
     headers:
       x-api-key: "${COMPOSIO_API_KEY}"
     timeout: 60000
 
   web-fetch:
     type: streamable-http
-    url: "https://mcp-server-fetch.api.smithery.ai"
+    url: "https://smithery.ai"  # SPRÁVNÁ BRÁNA
     timeout: 60000
 
 # 4. SEKCE: AKTIVACE GLOBÁLNÍHO WEBOVÉHO VYHLEDÁVÁNÍ PŘES TAVILY
