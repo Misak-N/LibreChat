@@ -20,11 +20,12 @@ interface:
     create: true
 
 # =============================================================================
-# MCP Settings
+# MCP Settings — List povolených adres pro MCP komunikaci
 # =============================================================================
 mcpSettings:
   allowedAddresses:
     - "host.docker.internal:8080"
+    - "librechat-production-6175.up.railway.app"
 
 # =============================================================================
 # MCP Servers
@@ -37,7 +38,7 @@ mcpServers:
       - "-y"
       - "@modelcontextprotocol/server-gdrive"
     requiresOAuth: true
-    url: "http://localhost:8080"
+    url: "https://librechat-production-6175.up.railway.app"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
