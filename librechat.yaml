@@ -20,12 +20,11 @@ interface:
     create: true
 
 # =============================================================================
-# MCP Settings
+# MCP Settings — Vyčištěno od veřejných adres, které validátor blokoval
 # =============================================================================
 mcpSettings:
   allowedAddresses:
     - "host.docker.internal:8080"
-    - "librechat-production-6175.up.railway.app"
 
 # =============================================================================
 # MCP Servers
@@ -80,7 +79,7 @@ endpoints:
     apiKey: "${ANTHROPIC_API_KEY}"
     fetch: true
   google:
-    apiKey: "${GOOGLE_SEARCH_API_KEY}"
+    apiKey: "${GOOGLE_SEARCH_API_KEY}",
     fetch: true
   agents:
     disableBuilder: false
