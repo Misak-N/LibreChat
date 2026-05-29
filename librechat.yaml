@@ -36,6 +36,7 @@ mcpServers:
     args:
       - "-y"
       - "@modelcontextprotocol/server-gdrive"
+      - "--headless"
     requiresOAuth: true
     url: "https://librechat-production-6175.up.railway.app"
     env:
