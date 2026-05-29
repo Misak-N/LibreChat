@@ -1,1 +1,159 @@
+# LibreChat Configuration
+# https://www.librechat.ai/docs/configuration/librechat_yaml
+version: "1.3.11"
+cache: true
 
+# =============================================================================
+# Interface
+# =============================================================================
+interface:
+  endpointsMenu: true
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  bookmarks: true
+  multiConvo: true
+  artifacts: true
+  agents:
+    use: true
+    create: true
+
+# =============================================================================
+# MCP Settings
+# =============================================================================
+mcpSettings:
+  allowedAddresses:
+    - "host.docker.internal:8080"
+
+# =============================================================================
+# MCP Servers
+# =============================================================================
+mcpServers:
+  gdrive:
+    type: stdio
+    command: npx
+    args:
+      - "-y"
+      - "@modelcontextprotocol/server-gdrive"
+    requiresOAuth: true
+    url: "https://librechat-production-6175.up.railway.app"
+
+# =============================================================================
+# Memory — AI si pamatuje tvoje preference mezi konverzacemi
+# =============================================================================
+memory:
+  disabled: false
+  personalize: true
+  tokenLimit: 3000
+  messageWindowSize: 5
+  validKeys:
+    - "preferences"
+    - "personal_info"
+    - "work_info"
+    - "skills"
+    - "interests"
+    - "context"
+  agent:
+    enabled: true
+    provider: "Groq"
+    model: "llama-3.1-8b-instant"
+    instructions: |
+      You are a memory management assistant. Store information using only these keys:
+      - preferences: communication style, language, workflow preferences
+      - personal_info: name, location, explicitly shared personal details
+      - work_info: job, projects, tools used
+      - skills: technical skills, expertise areas
+      - interests: hobbies, topics of interest
+      - context: ongoing projects, important facts
+      Only store what the user explicitly shares. Delete outdated information.
+    model_parameters:
+      temperature: 0.1
+      max_tokens: 1000
+
+# =============================================================================
+# Endpoints
+# =============================================================================
+endpoints:
+  anthropic:
+    apiKey: "${ANTHROPIC_API_KEY}"
+    fetch: true
+  google:
+    apiKey: "${GOOGLE_SEARCH_API_KEY}"
+    fetch: true
+  agents:
+    disableBuilder: false
+  custom:
+    - name: "DeepSeek"
+      type: "openai"
+      apiKey: "${DEEPSEEK_API_KEY}"
+      baseURL: "https://api.deepseek.com"
+      models:
+        default:
+          - "deepseek-chat"
+          - "deepseek-reasoner"
+        fetch: false
+      titleConvo: true
+      titleModel: "deepseek-chat"
+      modelDisplayLabel: "DeepSeek"
+    - name: "Groq"
+      apiKey: "${GROQ_API_KEY}"
+      baseURL: "https://api.groq.com/openai/v1/"
+      models:
+        default:
+          - "llama-3.3-70b-versatile"
+          - "llama-3.1-8b-instant"
+          - "qwen/qwen3-32b"
+          - "meta-llama/llama-4-scout-17b-16e-instruct"
+          - "openai/gpt-oss-20b"
+          - "openai/gpt-oss-120b"
+          - "mixtral-8x7b-32768"
+          - "gemma2-9b-it"
+        fetch: false
+      titleConvo: true
+      titleModel: "llama-3.1-8b-instant"
+      modelDisplayLabel: "Groq"
+    - name: "Mistral"
+      apiKey: "${MISTRAL_API_KEY}"
+      baseURL: "https://api.mistral.ai/v1"
+      models:
+        default:
+          - "mistral-small-latest"
+          - "codestral-latest"
+          - "mistral-medium-latest"
+        fetch: true
+      titleConvo: true
+      titleModel: "mistral-small-latest"
+      modelDisplayLabel: "Mistral"
+      dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
+    - name: "OpenRouter"
+      apiKey: "${OPENROUTER_KEY}"
+      baseURL: "https://openrouter.ai/api/v1"
+      models:
+        default:
+          - "meta-llama/llama-3-70b-instruct"
+        fetch: true
+      titleConvo: true
+      titleModel: "meta-llama/llama-3-70b-instruct"
+      dropParams: ["stop"]
+      modelDisplayLabel: "OpenRouter"
+
+# =============================================================================
+# Web Search
+# =============================================================================
+webSearch:
+  searchProvider: "tavily"
+  tavilyApiKey: "${TAVILY_API_KEY}"
+
+# =============================================================================
+# File Config
+# =============================================================================
+fileConfig:
+  serverFileSizeLimit: 104857600
+  endpoints:
+    assistants:
+      fileLimit: 10
+      fileSizeLimit: 104857600
+    agents:
+      fileLimit: 20
+      fileSizeLimit: 104857600
