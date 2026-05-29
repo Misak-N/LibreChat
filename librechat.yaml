@@ -35,8 +35,9 @@ mcpServers:
     command: npx
     args:
       - "-y"
-      - "@anthropic/server-gdrive"
+      - "@modelcontextprotocol/server-gdrive"
     requiresOAuth: true
+    url: "https://librechat-production-9ad1.up.railway.app"
     env:
       GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
 
