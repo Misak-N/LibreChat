@@ -37,7 +37,7 @@ mcpServers:
       - "-y"
       - "@modelcontextprotocol/server-gdrive"
     requiresOAuth: true
-    url: "https://librechat-production-6175.up.railway.app"
+    url: "http://localhost:8080"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
