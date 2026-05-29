@@ -37,7 +37,7 @@ mcpServers:
       - "-y"
       - "@modelcontextprotocol/server-gdrive"
     requiresOAuth: true
-    url: "${DOMAIN_CLIENT}"
+    url: "https://librechat-production-6175.up.railway.app"
     env:
       GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
 
