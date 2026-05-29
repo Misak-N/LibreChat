@@ -29,13 +29,17 @@ mcpSettings:
 # =============================================================================
 # MCP Servers
 # =============================================================================
-#mcpServers:
-#  composio:
-#    type: "streamable-http"
-#   url: "https://connect.composio.dev/mcp"
-#    headers:
-#      x-api-key: "${COMPOSIO_API_KEY}"
-#   timeout: 60000
+mcpServers:
+  gdrive:
+    type: stdio
+    command: bash
+    args:
+      - "-c"
+      - |
+        echo "$GDRIVE_OAUTH_JSON" | python3 -c "import sys,json; o=json.load(sys.stdin); json.dump(o, open('/tmp/gcp-oauth.keys.json','w'))" && export GDRIVE_OAUTH_PATH=/tmp/gcp-oauth.keys.json && npx -y github:dylancaponi/gdrive-mcp-server
+    requiresOAuth: true
+    env:
+      GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
@@ -80,9 +84,6 @@ endpoints:
     fetch: true
 
   # ---------- Google Gemini ----------
-  # Free tier: 1500 req/den, 1M tokenu/min
-  # API klic: https://aistudio.google.com/apikey
-  # V Railway Variables: GOOGLE_SEARCH_API_KEY=tvuj-klic
   google:
     apiKey: "${GOOGLE_SEARCH_API_KEY}"
     fetch: true
@@ -94,8 +95,6 @@ endpoints:
   # ---------- Custom endpointy ----------
   custom:
     # ========== DeepSeek ==========
-    # API klic: https://platform.deepseek.com
-    # V Railway Variables: DEEPSEEK_API_KEY=tvuj-klic
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
@@ -110,9 +109,6 @@ endpoints:
       modelDisplayLabel: "DeepSeek"
 
     # ========== Groq ==========
-    # Vsechny modely zdarma, rate limity per model
-    # API klic: https://console.groq.com
-    # V Railway Variables: GROQ_API_KEY=tvuj-klic
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1/"
@@ -132,8 +128,6 @@ endpoints:
       modelDisplayLabel: "Groq"
 
     # ========== Mistral ==========
-    # API klic: https://console.mistral.ai
-    # V Railway Variables: MISTRAL_API_KEY=tvuj-klic
     - name: "Mistral"
       apiKey: "${MISTRAL_API_KEY}"
       baseURL: "https://api.mistral.ai/v1"
@@ -149,8 +143,6 @@ endpoints:
       dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
 
     # ========== OpenRouter ==========
-    # Registrace: https://openrouter.ai -> Keys
-    # V Railway Variables: OPENROUTER_KEY=tvuj-klic
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
