@@ -26,14 +26,14 @@ mcpSettings:
     - "node-production-fe5a.up.railway.app"
 
 # =============================================================================
-# MCP Servers
+# MCP Servers — Propojeno přes SSE s Railway (bezpečná referenční metoda)
 # =============================================================================
 mcpServers:
   gdrive:
     transport: "sse"
     url: "https://node-production-fe5a.up.railway.app/sse"
     env:
-      GDRIVE_OAUTH_JSON: '{"client_id": "TVŮJ_CLIENT_ID", "client_secret": "TVŮJ_SECRET", "refresh_token": "TVŮJ_REFRESH_TOKEN"}'
+      GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
 
 # =============================================================================
 # Memory
