@@ -32,11 +32,10 @@ mcpSettings:
 mcpServers:
   gdrive:
     type: stdio
-    command: sh
+    command: npx
     args:
-      - "-c"
-      - |
-        echo "$GDRIVE_OAUTH_JSON" > /tmp/gcp-oauth.keys.json && export GDRIVE_OAUTH_PATH=/tmp/gcp-oauth.keys.json && npx -y github:dylancaponi/gdrive-mcp-server
+      - "-y"
+      - "@anthropic/server-gdrive"
     requiresOAuth: true
     env:
       GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
