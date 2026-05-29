@@ -32,18 +32,17 @@ mcpSettings:
 mcpServers:
   gdrive:
     type: stdio
-    command: bash
+    command: sh
     args:
       - "-c"
       - |
-        echo "$GDRIVE_OAUTH_JSON" | python3 -c "import sys,json; o=json.load(sys.stdin); json.dump(o, open('/tmp/gcp-oauth.keys.json','w'))" && export GDRIVE_OAUTH_PATH=/tmp/gcp-oauth.keys.json && npx -y github:dylancaponi/gdrive-mcp-server
+        echo "$GDRIVE_OAUTH_JSON" > /tmp/gcp-oauth.keys.json && export GDRIVE_OAUTH_PATH=/tmp/gcp-oauth.keys.json && npx -y github:dylancaponi/gdrive-mcp-server
     requiresOAuth: true
     env:
       GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
-# Pouziva Groq (Llama 3.1 8B) jako memory agenta — zdarma
 # =============================================================================
 memory:
   disabled: false
@@ -78,23 +77,15 @@ memory:
 # Endpoints
 # =============================================================================
 endpoints:
-  # ---------- Anthropic ----------
   anthropic:
     apiKey: "${ANTHROPIC_API_KEY}"
     fetch: true
-
-  # ---------- Google Gemini ----------
   google:
     apiKey: "${GOOGLE_SEARCH_API_KEY}"
     fetch: true
-
-  # ---------- Agents ----------
   agents:
     disableBuilder: false
-
-  # ---------- Custom endpointy ----------
   custom:
-    # ========== DeepSeek ==========
     - name: "DeepSeek"
       type: "openai"
       apiKey: "${DEEPSEEK_API_KEY}"
@@ -107,8 +98,6 @@ endpoints:
       titleConvo: true
       titleModel: "deepseek-chat"
       modelDisplayLabel: "DeepSeek"
-
-    # ========== Groq ==========
     - name: "Groq"
       apiKey: "${GROQ_API_KEY}"
       baseURL: "https://api.groq.com/openai/v1/"
@@ -126,8 +115,6 @@ endpoints:
       titleConvo: true
       titleModel: "llama-3.1-8b-instant"
       modelDisplayLabel: "Groq"
-
-    # ========== Mistral ==========
     - name: "Mistral"
       apiKey: "${MISTRAL_API_KEY}"
       baseURL: "https://api.mistral.ai/v1"
@@ -141,8 +128,6 @@ endpoints:
       titleModel: "mistral-small-latest"
       modelDisplayLabel: "Mistral"
       dropParams: ["stop", "user", "frequency_penalty", "presence_penalty"]
-
-    # ========== OpenRouter ==========
     - name: "OpenRouter"
       apiKey: "${OPENROUTER_KEY}"
       baseURL: "https://openrouter.ai/api/v1"
