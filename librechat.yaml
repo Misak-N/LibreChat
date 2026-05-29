@@ -20,7 +20,7 @@ interface:
     create: true
 
 # =============================================================================
-# MCP Settings — Vyčištěno od veřejných adres, které validátor blokoval
+# MCP Settings
 # =============================================================================
 mcpSettings:
   allowedAddresses:
@@ -79,7 +79,7 @@ endpoints:
     apiKey: "${ANTHROPIC_API_KEY}"
     fetch: true
   google:
-    apiKey: "${GOOGLE_SEARCH_API_KEY}",
+    apiKey: "${GOOGLE_SEARCH_API_KEY}"
     fetch: true
   agents:
     disableBuilder: false
