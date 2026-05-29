@@ -1,5 +1,3 @@
-# LibreChat Configuration
-# https://www.librechat.ai/docs/configuration/librechat_yaml
 version: "1.3.11"
 cache: true
 
@@ -25,17 +23,20 @@ interface:
 mcpSettings:
   allowedAddresses:
     - "host.docker.internal:8080"
+    - "node-production-fe5a.up.railway.app"
 
 # =============================================================================
-# MCP Servers — Čisté síťové propojení na tvůj nový placený server
+# MCP Servers
 # =============================================================================
 mcpServers:
   gdrive:
-    type: sse
-    url: "https://node-production-da70.up.railway.app/sse"
+    transport: "sse"
+    url: "https://node-production-fe5a.up.railway.app/sse"
+    env:
+      GDRIVE_OAUTH_JSON: '{"client_id": "TVŮJ_CLIENT_ID", "client_secret": "TVŮJ_SECRET", "refresh_token": "TVŮJ_REFRESH_TOKEN"}'
 
 # =============================================================================
-# Memory — AI si pamatuje tvoje preference mezi konverzacemi
+# Memory
 # =============================================================================
 memory:
   disabled: false
@@ -134,15 +135,12 @@ endpoints:
       modelDisplayLabel: "OpenRouter"
 
 # =============================================================================
-# Web Search
+# Web Search & Files
 # =============================================================================
 webSearch:
   searchProvider: "tavily"
   tavilyApiKey: "${TAVILY_API_KEY}"
 
-# =============================================================================
-# File Config
-# =============================================================================
 fileConfig:
   serverFileSizeLimit: 104857600
   endpoints:
