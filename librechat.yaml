@@ -32,15 +32,12 @@ mcpSettings:
 mcpServers:
   gdrive:
     type: stdio
-    command: sh
+    command: npx
     args:
-      - "-c"
-      - 'mkdir -p ~/.config/modelcontextprotocol-server-gdrive && echo "$GDRIVE_OAUTH_JSON" > ~/.config/modelcontextprotocol-server-gdrive/credentials.json && npx -y @modelcontextprotocol/server-gdrive'
+      - "-y"
+      - "@modelcontextprotocol/server-gdrive"
     requiresOAuth: true
     url: "https://librechat-production-6175.up.railway.app"
-    env:
-      GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
-      GDRIVE_OAUTH_URL: "https://librechat-production-6175.up.railway.app"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
