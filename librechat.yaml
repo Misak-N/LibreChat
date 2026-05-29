@@ -23,10 +23,9 @@ interface:
 mcpSettings:
   allowedAddresses:
     - "host.docker.internal:8080"
-    - "node-production-fe5a.up.railway.app"
 
 # =============================================================================
-# MCP Servers — Propojeno přes SSE s Railway (bezpečná referenční metoda)
+# MCP Servers
 # =============================================================================
 mcpServers:
   gdrive:
