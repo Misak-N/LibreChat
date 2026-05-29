@@ -20,7 +20,7 @@ interface:
     create: true
 
 # =============================================================================
-# MCP Settings — List povolených adres pro MCP komunikaci
+# MCP Settings
 # =============================================================================
 mcpSettings:
   allowedAddresses:
