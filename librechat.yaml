@@ -27,17 +27,12 @@ mcpSettings:
     - "host.docker.internal:8080"
 
 # =============================================================================
-# MCP Servers
+# MCP Servers — Čisté síťové propojení na tvůj nový placený server
 # =============================================================================
 mcpServers:
   gdrive:
-    type: stdio
-    command: npx
-    args:
-      - "-y"
-      - "@modelcontextprotocol/server-gdrive"
-    requiresOAuth: true
-    url: "https://librechat-production-6175.up.railway.app"
+    type: sse
+    url: "https://node-production-da70.up.railway.app/sse"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
