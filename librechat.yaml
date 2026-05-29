@@ -40,7 +40,7 @@ mcpServers:
     url: "https://librechat-production-6175.up.railway.app"
     env:
       GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
-      GDRIVE_OAUTH_URL: "https://librechat-production-6175.up.railway.app""
+      GDRIVE_OAUTH_URL: "https://librechat-production-6175.up.railway.app"
 
 # =============================================================================
 # Memory — AI si pamatuje tvoje preference mezi konverzacemi
