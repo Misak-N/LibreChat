@@ -28,11 +28,10 @@ mcpSettings:
 # MCP Servers
 # =============================================================================
 mcpServers:
-  gdrive:
-    transport: "sse"
-    url: "https://node-production-fe5a.up.railway.app/sse"
-    env:
-      GDRIVE_OAUTH_JSON: "${GDRIVE_OAUTH_JSON}"
+  google-drive:
+    type: "streamable-http"
+    url: "https://google-drive-mcp-production-68f8.up.railway.app"
+    timeout: 60000
 
 # =============================================================================
 # Memory
