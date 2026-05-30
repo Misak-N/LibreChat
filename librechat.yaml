@@ -29,8 +29,8 @@ mcpSettings:
 # =============================================================================
 mcpServers:
   google-drive:
-    type: "sse"
-    url: "https://google-drive-mcp-production-68f8.up.railway.app/sse"
+    type: "streamable-http"
+    url: "https://google-drive-mcp-production-68f8.up.railway.app/mcp"
     timeout: 60000
 
 # =============================================================================
